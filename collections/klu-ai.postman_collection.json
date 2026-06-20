@@ -1,0 +1,282 @@
+{
+  "info": {
+    "name": "Klu API",
+    "description": "REST API for the Klu (klu.ai) LLM app platform. Run Actions to generate completions and manage context, data, feedback, sessions, models, apps, and workspaces. Bearer API key auth. NOTE - product appears dormant; see review.yml.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{apiKey}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.klu.ai/v1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Actions",
+      "item": [
+        {
+          "name": "Run an Action",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/actions",
+              "host": ["{{baseUrl}}"],
+              "path": ["actions"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<action_guid>\",\n  \"input\": \"<string or key-value object>\",\n  \"streaming\": false,\n  \"async_mode\": false,\n  \"cache\": false,\n  \"session\": \"<session_guid>\",\n  \"metadata_filter\": {},\n  \"experiment\": \"<experiment_guid>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Context",
+      "item": [
+        {
+          "name": "Create a Context library",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/context",
+              "host": ["{{baseUrl}}"],
+              "path": ["context"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"Custom\",\n  \"files\": []\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Add a document to a Context library",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/context/{{guid}}/documents",
+              "host": ["{{baseUrl}}"],
+              "path": ["context", "{{guid}}", "documents"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"meta_data\": {}\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Add files to a Context library",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/context/{{guid}}/add_files",
+              "host": ["{{baseUrl}}"],
+              "path": ["context", "{{guid}}", "add_files"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"files\": []\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Data",
+      "item": [
+        {
+          "name": "Get a data point",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/data/{{guid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["data", "{{guid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Feedback",
+      "item": [
+        {
+          "name": "Submit feedback on a data point",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/feedback",
+              "host": ["{{baseUrl}}"],
+              "path": ["feedback"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data_guid\": \"<data_point_guid>\",\n  \"type\": \"rating\",\n  \"value\": 2\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sessions",
+      "item": [
+        {
+          "name": "Create a session",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/sessions",
+              "host": ["{{baseUrl}}"],
+              "path": ["sessions"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<action_guid>\",\n  \"name\": \"<string>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get a session",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sessions/{{guid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["sessions", "{{guid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Models",
+      "item": [
+        {
+          "name": "List models",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/models",
+              "host": ["{{baseUrl}}"],
+              "path": ["models"]
+            }
+          }
+        },
+        {
+          "name": "Get a model",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/models/{{guid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["models", "{{guid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Apps",
+      "item": [
+        {
+          "name": "List apps",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/apps",
+              "host": ["{{baseUrl}}"],
+              "path": ["apps"]
+            }
+          }
+        },
+        {
+          "name": "Create an app",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/apps",
+              "host": ["{{baseUrl}}"],
+              "path": ["apps"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"app_type\": \"<string>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get an app",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/apps/{{guid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["apps", "{{guid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workspaces",
+      "item": [
+        {
+          "name": "List workspaces",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/workspaces",
+              "host": ["{{baseUrl}}"],
+              "path": ["workspaces"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

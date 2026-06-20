@@ -1,0 +1,107 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Klu
+providerId: klu-ai
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- LLM App Platform
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Klu spend. Klu bills a seat-based SaaS subscription (Starter free,
+  Team per-seat, Enterprise custom) for the platform, while the variable cost of
+  generations flows through the upstream LLM providers (OpenAI, Anthropic, and
+  others) whose API keys are connected to a workspace. Cost optimization therefore
+  spans two layers - Klu seats and upstream model token spend - with caching,
+  smaller models, and evaluation-driven model selection as the main levers.
+notes: >-
+  reconciled false - seat pricing is taken from the public marketing site and the
+  upstream token costs depend on the connected providers, not Klu. Verify figures
+  and platform availability before relying on them; the product appears dormant
+  (see review.yml).
+sources:
+- https://klu.ai
+- https://docs.klu.ai/resources/api-basics
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Klu
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Klu LLM App Platform
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Klu
+  PublisherName: Klu
+  InvoiceIssuerName: Klu
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: seats
+  description: Billable platform seats on the Team tier, charged per seat per month.
+  unit: seats
+  aggregation: sum
+  dimensions:
+  - workspace
+  - plan
+- name: action_runs
+  description: Action generations executed via the Klu Engine; track to attribute upstream token cost.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - workspace
+  - app
+  - action
+- name: upstream_input_tokens
+  description: Input tokens billed by the connected upstream LLM provider for generations.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - workspace
+  - model
+  - provider
+- name: upstream_output_tokens
+  description: Output tokens billed by the connected upstream LLM provider for generations.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - workspace
+  - model
+  - provider
+- name: context_documents
+  description: Documents and files ingested into Context libraries for retrieval-augmented generation.
+  unit: documents
+  aggregation: sum
+  dimensions:
+  - workspace
+  - context
+principles:
+- name: Visibility
+  description: Separate Klu seat spend from upstream LLM provider token spend; attribute Action runs to apps and teams.
+- name: Allocation
+  description: Tag Actions and API keys per app/team and map to internal cost centers; reconcile upstream provider invoices.
+- name: Optimization
+  description: Enable response caching, pick smaller models in Action model config, and use experiments/evals to select the cheapest model that passes quality bars.
+- name: Accountability
+  description: Assign owners per app and review combined seat plus upstream token spend monthly against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

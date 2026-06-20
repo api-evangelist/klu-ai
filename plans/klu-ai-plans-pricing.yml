@@ -1,0 +1,98 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Klu
+providerId: klu-ai
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- LLM App Platform
+- Prompt Engineering
+- Plans
+description: >-
+  Klu markets a seat-based SaaS pricing model for its LLM app platform - a free
+  Starter tier for solo builders, a per-seat Team tier, and custom Enterprise
+  pricing for private deployments and governance. Underlying LLM provider token
+  costs are billed by the upstream providers (OpenAI, Anthropic, and others)
+  whose keys are connected to a workspace; Klu brokers across them. Exact figures
+  below are taken from the public marketing site and are NOT reconciled - the
+  platform's pricing page and product appear stale (the official SDK last shipped
+  March 2025), so verify all numbers and availability directly before relying on
+  them.
+notes: >-
+  reconciled false - pricing reflects the public klu.ai marketing site as of
+  2026-06-20 and could not be confirmed against a live billing or checkout flow.
+  Product development appears dormant; see review.yml for status.
+sources:
+- https://klu.ai
+- https://docs.klu.ai/resources/api-basics
+plans:
+- id: klu-starter
+  name: Starter
+  type: free
+  description: >-
+    Free tier aimed at solo builders experimenting with prompts and Actions.
+  entries:
+  - label: Starter Seat
+    name: starter_seat
+    type: flat
+    metric: seats
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0 (free forever, per marketing site)
+    userMultiplied: false
+  elements:
+  - name: Studio
+  - name: Actions / Prompt API
+  - name: Data and Feedback
+- id: klu-team
+  name: Team
+  type: subscription
+  description: >-
+    Per-seat plan for product teams shipping LLM features, with collaboration,
+    evaluation, and observability.
+  entries:
+  - label: Team Seat
+    name: team_seat
+    type: flat
+    metric: seats
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $99 per seat / month (per marketing site, unverified)
+    userMultiplied: true
+  elements:
+  - name: Studio
+  - name: Observe
+  - name: Experiments and Evals
+  - name: Sessions
+- id: klu-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom pricing for regulated teams needing private infrastructure,
+    governance controls, and dedicated support. Contact Klu sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Private Deployments
+  - name: Governance and Controls
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,261 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klu API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{apiKey}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Run an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/actions",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"action\": \"<action_guid>\",\n  \"input\": \"<string or key-value object>\",\n  \"streaming\": false,\n  \"async_mode\": false,\n  \"cache\": false\n}"
+            }
+          },
+          "docs": "Executes a Klu Action by GUID against the provided input, returning the generated completion and a feedback URL."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Context",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Context library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/context",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"Custom\"\n}"
+            }
+          },
+          "docs": "Creates a new Context library for retrieval-augmented generation."
+        },
+        {
+          "info": {
+            "name": "Add a document to a Context library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/context/{guid}/documents",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"text\": \"<string>\",\n  \"meta_data\": {}\n}"
+            }
+          },
+          "docs": "Adds app data as a Context document with optional metadata."
+        },
+        {
+          "info": {
+            "name": "Add files to a Context library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/context/{guid}/add_files",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"files\": []\n}"
+            }
+          },
+          "docs": "Adds one or more files to an existing Context library."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a data point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klu.ai/v1/data/{guid}"
+          },
+          "docs": "Retrieves a data point by GUID, including its prompt, completion, and metadata."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit feedback on a data point",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/feedback",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"data_guid\": \"<data_point_guid>\",\n  \"type\": \"rating\",\n  \"value\": 2\n}"
+            }
+          },
+          "docs": "Submits feedback for a generation. Ratings use 1 (negative) and 2 (positive)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/sessions",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"action\": \"<action_guid>\",\n  \"name\": \"<string>\"\n}"
+            }
+          },
+          "docs": "Creates a session used to store and retrieve memory across Action generations."
+        },
+        {
+          "info": {
+            "name": "Get a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klu.ai/v1/sessions/{guid}"
+          },
+          "docs": "Retrieves a session by GUID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klu.ai/v1/models"
+          },
+          "docs": "Lists the LLM providers and models available in the workspace."
+        },
+        {
+          "info": {
+            "name": "Get a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klu.ai/v1/models/{guid}"
+          },
+          "docs": "Retrieves a model by GUID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Apps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klu.ai/v1/apps"
+          },
+          "docs": "Lists the Apps (projects) in the workspace."
+        },
+        {
+          "info": {
+            "name": "Create an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/apps",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"app_type\": \"<string>\"\n}"
+            }
+          },
+          "docs": "Creates an App (project)."
+        },
+        {
+          "info": {
+            "name": "Get an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klu.ai/v1/apps/{guid}"
+          },
+          "docs": "Retrieves an App by GUID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klu.ai/v1/workspaces"
+          },
+          "docs": "Lists the workspaces accessible to the API key."
+        }
+      ]
+    }
+  ]
+}

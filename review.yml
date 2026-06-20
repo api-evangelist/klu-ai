@@ -1,0 +1,127 @@
+aid: klu-ai
+name: Klu
+review:
+  question: Is Klu (klu.ai) an actively maintained LLM app platform with a documented public REST API, and does it expose any streaming / WebSocket surface?
+  answer: partial
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Klu's documented streaming is the
+    `streaming: true` option on POST /v1/actions, which returns a stream_url
+    for token-by-token delivery (an HTTP streaming / SSE-style mechanism over
+    the REST endpoint). No bidirectional WebSocket (ws:// or wss://) surface is
+    documented. Given the product's apparent dormancy and the lack of a fully
+    documented streaming protocol, an AsyncAPI artifact would be speculative and
+    was intentionally omitted.
+companyStatus:
+  summary: |
+    Klu, Inc. (klu.ai), founded by Stephen M. Walker II around 2022, markets an
+    LLM app platform (Studio for prompt design/eval, Observe for observability,
+    Enterprise for private deployments) with a real REST API at
+    https://api.klu.ai/v1 using Bearer API-key auth. As of this review the
+    public marketing site (klu.ai) and documentation (docs.klu.ai) are still
+    live and still describe the product and three pricing tiers (Starter free,
+    Team per-seat, Enterprise custom).
+
+    HOWEVER, several signals indicate the product is dormant / no longer actively
+    developed rather than wound down or acquired:
+      - The official `klu` Python SDK on PyPI last shipped version 0.1.80 in
+        March 2025 - over a year stale at review time.
+      - The klu-ai GitHub organization is still active but its recent public
+        repositories have pivoted away from the LLM-app-platform product toward
+        xAI / Grok tooling (e.g. grok-code, grok-macos, swift-grok, wolverine),
+        suggesting the founding team's focus has shifted.
+      - No acquisition announcement and no formal sunset/shutdown notice were
+        found in public sources as of 2026-06-20.
+
+    Conclusion: treat Klu as a real, documented platform whose API surface is
+    accurately captured here, but flag it as likely dormant. Verify live API
+    availability, pricing, and account sign-up before building on it. No evidence
+    of acquisition or hard shutdown; no evidence of continued active development.
+  evidence:
+    - klu.ai marketing site live, lists Studio / Observe / Enterprise and Starter/Team/Enterprise pricing.
+    - docs.klu.ai live; documents POST /v1/actions, /v1/context endpoints and the klu SDK modules.
+    - PyPI `klu` package last release 0.1.80 on 2025-03-22.
+    - GitHub org github.com/klu-ai ("KLU.AI", "K-human Likeness Utility") recent repos focused on Grok/xAI tooling.
+findings:
+  summary: |
+    Klu exposes a single-endpoint generative core (the Klu Engine) plus
+    resource management for context, data, feedback, sessions, models, apps, and
+    workspaces. Authentication is a Bearer API key from the workspace API Keys
+    settings. The base URL is https://api.klu.ai/v1. Streaming is offered as an
+    option on the Actions endpoint (stream_url), not as a separate WebSocket API.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.klu.ai/v1
+      documented: true
+    - protocol: HTTP streaming / SSE
+      scheme: https
+      note: streaming=true on POST /v1/actions returns a stream_url for token-by-token output. Not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the Klu API reference or SDK.
+  endpointsDocumentedVerbatim:
+    - POST https://api.klu.ai/v1/actions
+    - POST https://api.klu.ai/v1/context
+    - POST https://api.klu.ai/v1/context/{guid}/documents
+    - POST https://api.klu.ai/v1/context/{guid}/add_files
+  endpointsModeledFromSdk:
+    - GET    https://api.klu.ai/v1/data/{guid}
+    - POST   https://api.klu.ai/v1/feedback
+    - POST   https://api.klu.ai/v1/sessions
+    - GET    https://api.klu.ai/v1/sessions/{guid}
+    - GET    https://api.klu.ai/v1/models
+    - GET    https://api.klu.ai/v1/models/{guid}
+    - GET    https://api.klu.ai/v1/apps
+    - POST   https://api.klu.ai/v1/apps
+    - GET    https://api.klu.ai/v1/apps/{guid}
+    - GET    https://api.klu.ai/v1/workspaces
+  sdkModulesConfirmed:
+    - klu.apps
+    - klu.actions
+    - klu.context
+    - klu.session
+    - klu.feedback
+    - klu.data
+    - klu.models
+    - klu.experiment
+    - klu.finetune
+sources:
+  - url: https://docs.klu.ai/resources/api-basics
+    type: Documentation
+    note: API getting started; Bearer API key from workspace API Keys tab; recommends SDKs.
+  - url: https://docs.klu.ai/resources/api-actions
+    type: APIReference
+    note: POST /v1/actions request fields (action, input, streaming, async_mode, cache, session, metadata_filter, experiment) and response (text, feedback_url, stream_url).
+  - url: https://docs.klu.ai/resources/api-context
+    type: APIReference
+    note: POST /v1/context, /v1/context/{guid}/documents, /v1/context/{guid}/add_files.
+  - url: https://docs.klu.ai/guides/data
+    type: Documentation
+    note: Data points hold prompt+completion+metadata; feedback ratings use 1 (negative) and 2 (positive); import/export JSONL/CSV.
+  - url: https://klu.ai
+    type: Website
+    note: Product and pricing marketing; still live as of review date.
+  - url: https://github.com/klu-ai
+    type: GitHubOrganization
+    note: Recent repos pivoted to Grok/xAI tooling - status signal.
+  - url: https://pypi.org/project/klu/
+    type: SDK
+    note: Official Python SDK; last release 0.1.80 on 2025-03-22 - staleness signal.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    apis.yml, README.md, the OpenAPI spec, and the plans/rate-limits/finops
+    artifacts were authored from the documented Klu API surface. The honest
+    company-status assessment (likely dormant; no acquisition or hard shutdown
+    found; SDK stale since March 2025; founding team's OSS shifted to Grok) is
+    recorded here and surfaced in the apis.yml/README descriptions and in the
+    reconciled:false flags on plans/rate-limits/finops.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

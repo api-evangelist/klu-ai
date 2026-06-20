@@ -1,0 +1,57 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Klu
+providerId: klu-ai
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- LLM App Platform
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Klu does not publish explicit numeric rate limits for the Klu Engine API in its
+  public documentation. Generation throughput is effectively bounded by the
+  upstream LLM provider limits (OpenAI, Anthropic, and others) tied to the keys
+  connected to a workspace, and by any account-level limits Klu applies to Action
+  runs. Specific per-account or per-endpoint values are not reconciled in this
+  artifact.
+notes: >-
+  reconciled false - no documented RPM/TPM figures were found on docs.klu.ai.
+  Clients should expect provider-side throttling on upstream model calls and Klu
+  account limits on Action runs. Verify against the workspace settings and current
+  documentation on reconciliation; note the product appears dormant (see review.yml).
+sources:
+- https://docs.klu.ai/resources/api-basics
+- https://docs.klu.ai/resources/api-actions
+- https://klu.ai
+responseCodes:
+  throttled: 429
+limits:
+- name: Action Runs
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: No published numeric limit on POST /v1/actions; bounded by account and upstream provider limits.
+- name: Upstream Model Tokens
+  scope: account
+  metric: tokens
+  limit: see upstream provider documentation
+  notes: Token throughput is governed by the connected LLM provider's rate limits for the workspace key.
+- name: Context Ingestion
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Document and file ingestion into Context libraries; no published numeric limit.
+policies:
+- name: Upstream Pass-Through
+  description: Generation limits largely follow the rate limits of the upstream LLM provider connected to the workspace.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor 429 / Retry-After responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
