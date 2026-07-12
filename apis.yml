@@ -139,6 +139,10 @@ apis:
     Actions, context, and experiments. Apps are the top-level container for an AI
     use case; experiments run prompt-vs-prompt evaluations and A/B tests within them.
 common:
+- type: DomainSecurity
+  url: security/klu-ai-domain-security.yml
+- type: Authentication
+  url: authentication/klu-ai-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/klu-ai
 - type: LinkedIn
