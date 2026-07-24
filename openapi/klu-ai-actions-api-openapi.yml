@@ -1,0 +1,123 @@
+openapi: 3.0.1
+info:
+  title: Klu Actions API
+  description: 'REST API for the Klu (klu.ai) LLM app platform. The Klu Engine runs Actions - each encapsulating a prompt template, model config, context (RAG), and output parsing - against input variables to generate completions, and manages the data, feedback, sessions, models, apps, and workspaces around them. Authentication is via a Bearer API key obtained from the workspace API Keys settings.
+
+    NOTE - Endpoints under the Actions, Context, and Apps/Workspaces paths reflect the publicly documented Klu API reference and SDK surface. Where the public docs document a capability via the SDK but do not publish the exact REST path, this spec models the conventional resource path used by the Klu Engine; see review.yml for which operations are documented verbatim versus inferred from the SDK.'
+  termsOfService: https://klu.ai/terms
+  contact:
+    name: Klu Support
+    url: https://help.klu.ai/
+  version: '1.0'
+servers:
+- url: https://api.klu.ai/v1
+  description: Klu Engine production API
+security:
+- bearerAuth: []
+tags:
+- name: Actions
+  description: Run Actions to generate completions.
+paths:
+  /actions:
+    post:
+      operationId: runAction
+      tags:
+      - Actions
+      summary: Run an Action
+      description: Executes a Klu Action by GUID against the provided input, returning the generated completion and a feedback URL containing the data point GUID. Supports streaming, async execution, response caching, session memory, context metadata filtering, and experiments.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunActionRequest'
+      responses:
+        '200':
+          description: Generation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunActionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    RunActionResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+          description: The generated completion text.
+        feedback_url:
+          type: string
+          description: URL containing the data point GUID for submitting feedback on this generation.
+        stream_url:
+          type: string
+          description: Token streaming endpoint, present when streaming is enabled.
+        data_guid:
+          type: string
+          description: GUID of the data point recorded for this generation.
+    RunActionRequest:
+      type: object
+      required:
+      - action
+      - input
+      properties:
+        action:
+          type: string
+          description: GUID of the Action to run.
+        input:
+          description: Input string, or an object of key-value variable pairs for the prompt template.
+          oneOf:
+          - type: string
+          - type: object
+            additionalProperties: true
+        streaming:
+          type: boolean
+          description: Stream the response token by token.
+          default: false
+        async_mode:
+          type: boolean
+          description: Execute asynchronously and return a generation GUID to retrieve results later.
+          default: false
+        cache:
+          type: boolean
+          description: Return a cached response when an equivalent generation is available.
+          default: false
+        session:
+          type: string
+          description: Session GUID to use for conversational context.
+        metadata_filter:
+          type: object
+          additionalProperties: true
+          description: Filter Context documents by metadata attributes.
+        experiment:
+          type: string
+          description: Experiment GUID for A/B testing.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Klu API key passed as a Bearer token in the Authorization header.

@@ -1,0 +1,126 @@
+openapi: 3.0.1
+info:
+  title: Klu Actions Apps API
+  description: 'REST API for the Klu (klu.ai) LLM app platform. The Klu Engine runs Actions - each encapsulating a prompt template, model config, context (RAG), and output parsing - against input variables to generate completions, and manages the data, feedback, sessions, models, apps, and workspaces around them. Authentication is via a Bearer API key obtained from the workspace API Keys settings.
+
+    NOTE - Endpoints under the Actions, Context, and Apps/Workspaces paths reflect the publicly documented Klu API reference and SDK surface. Where the public docs document a capability via the SDK but do not publish the exact REST path, this spec models the conventional resource path used by the Klu Engine; see review.yml for which operations are documented verbatim versus inferred from the SDK.'
+  termsOfService: https://klu.ai/terms
+  contact:
+    name: Klu Support
+    url: https://help.klu.ai/
+  version: '1.0'
+servers:
+- url: https://api.klu.ai/v1
+  description: Klu Engine production API
+security:
+- bearerAuth: []
+tags:
+- name: Apps
+  description: Apps (projects) grouping Actions, context, and experiments.
+paths:
+  /apps:
+    get:
+      operationId: listApps
+      tags:
+      - Apps
+      summary: List apps
+      description: Lists the Apps (projects) in the workspace.
+      responses:
+        '200':
+          description: App list.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/App'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createApp
+      tags:
+      - Apps
+      summary: Create an app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppRequest'
+      responses:
+        '200':
+          description: App created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /apps/{guid}:
+    get:
+      operationId: getApp
+      tags:
+      - Apps
+      summary: Get an app
+      parameters:
+      - $ref: '#/components/parameters/Guid'
+      responses:
+        '200':
+          description: App.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    CreateAppRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        app_type:
+          type: string
+    App:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        app_type:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  parameters:
+    Guid:
+      name: guid
+      in: path
+      required: true
+      description: GUID of the resource.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Klu API key passed as a Bearer token in the Authorization header.

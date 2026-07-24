@@ -1,0 +1,97 @@
+openapi: 3.0.1
+info:
+  title: Klu Actions Models API
+  description: 'REST API for the Klu (klu.ai) LLM app platform. The Klu Engine runs Actions - each encapsulating a prompt template, model config, context (RAG), and output parsing - against input variables to generate completions, and manages the data, feedback, sessions, models, apps, and workspaces around them. Authentication is via a Bearer API key obtained from the workspace API Keys settings.
+
+    NOTE - Endpoints under the Actions, Context, and Apps/Workspaces paths reflect the publicly documented Klu API reference and SDK surface. Where the public docs document a capability via the SDK but do not publish the exact REST path, this spec models the conventional resource path used by the Klu Engine; see review.yml for which operations are documented verbatim versus inferred from the SDK.'
+  termsOfService: https://klu.ai/terms
+  contact:
+    name: Klu Support
+    url: https://help.klu.ai/
+  version: '1.0'
+servers:
+- url: https://api.klu.ai/v1
+  description: Klu Engine production API
+security:
+- bearerAuth: []
+tags:
+- name: Models
+  description: LLM providers and models available in the workspace.
+paths:
+  /models:
+    get:
+      operationId: listModels
+      tags:
+      - Models
+      summary: List models
+      description: Lists the LLM providers and models available in the workspace.
+      responses:
+        '200':
+          description: Model list.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Model'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /models/{guid}:
+    get:
+      operationId: getModel
+      tags:
+      - Models
+      summary: Get a model
+      parameters:
+      - $ref: '#/components/parameters/Guid'
+      responses:
+        '200':
+          description: Model.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Model:
+      type: object
+      properties:
+        guid:
+          type: string
+        llm:
+          type: string
+          description: Model identifier.
+        provider:
+          type: string
+          description: Provider name, e.g. OpenAI or Anthropic.
+        key:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Guid:
+      name: guid
+      in: path
+      required: true
+      description: GUID of the resource.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Klu API key passed as a Bearer token in the Authorization header.
