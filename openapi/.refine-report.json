@@ -1,0 +1,28 @@
+{
+  "provider": "klu-ai",
+  "sources": [
+    "klu-ai-actions-api-openapi.yml",
+    "klu-ai-apps-api-openapi.yml",
+    "klu-ai-context-api-openapi.yml",
+    "klu-ai-data-api-openapi.yml",
+    "klu-ai-feedback-api-openapi.yml",
+    "klu-ai-models-api-openapi.yml",
+    "klu-ai-sessions-api-openapi.yml",
+    "klu-ai-workspaces-api-openapi.yml"
+  ],
+  "outputs": [
+    "klu-ai-actions-api-openapi.yml",
+    "klu-ai-apps-api-openapi.yml",
+    "klu-ai-context-api-openapi.yml",
+    "klu-ai-data-api-openapi.yml",
+    "klu-ai-feedback-api-openapi.yml",
+    "klu-ai-models-api-openapi.yml",
+    "klu-ai-sessions-api-openapi.yml",
+    "klu-ai-workspaces-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
