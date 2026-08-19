@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "0cd26de8-f28f-4bce-ba98-2a9185f23ddb",
+      "name": "Actions",
+      "description": {
+        "content": "Run Actions to generate completions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a82072c8-c009-4852-b90e-41792f2d50e6",
+          "name": "Run an Action",
+          "request": {
+            "name": "Run an Action",
+            "description": {
+              "content": "Executes a Klu Action by GUID against the provided input, returning the generated completion and a feedback URL containing the data point GUID. Supports streaming, async execution, response caching, session memory, context metadata filtering, and experiments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"input\": \"<string>\",\n  \"streaming\": false,\n  \"async_mode\": false,\n  \"cache\": false,\n  \"session\": \"<string>\",\n  \"metadata_filter\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": 5430,\n    \"key_3\": 5920.396804842735,\n    \"key_4\": 4157.830068953611\n  },\n  \"experiment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c586d07-010e-4eda-af6f-0072fe4deeda",
+              "name": "Generation result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"input\": \"<string>\",\n  \"streaming\": false,\n  \"async_mode\": false,\n  \"cache\": false,\n  \"session\": \"<string>\",\n  \"metadata_filter\": {\n    \"key_0\": false,\n    \"key_1\": 9269.458452803852\n  },\n  \"experiment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"msg\": \"string\",\n  \"feedback_url\": \"string\",\n  \"stream_url\": \"string\",\n  \"data_guid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93d5df12-925c-440d-99e7-f59c22f72acc",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"input\": \"<string>\",\n  \"streaming\": false,\n  \"async_mode\": false,\n  \"cache\": false,\n  \"session\": \"<string>\",\n  \"metadata_filter\": {\n    \"key_0\": false,\n    \"key_1\": 9269.458452803852\n  },\n  \"experiment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccd69439-b0fa-4c93-bd46-9455b450b842",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"input\": \"<string>\",\n  \"streaming\": false,\n  \"async_mode\": false,\n  \"cache\": false,\n  \"session\": \"<string>\",\n  \"metadata_filter\": {\n    \"key_0\": false,\n    \"key_1\": 9269.458452803852\n  },\n  \"experiment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.klu.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f8144af4-a7fb-4b1c-b05e-fe89effdf5b1",
+    "name": "Klu Actions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Klu (klu.ai) LLM app platform. The Klu Engine runs Actions - each encapsulating a prompt template, model config, context (RAG), and output parsing - against input variables to generate completions, and manages the data, feedback, sessions, models, apps, and workspaces around them. Authentication is via a Bearer API key obtained from the workspace API Keys settings.\nNOTE - Endpoints under the Actions, Context, and Apps/Workspaces paths reflect the publicly documented Klu API reference and SDK surface. Where the public docs document a capability via the SDK but do not publish the exact REST path, this spec models the conventional resource path used by the Klu Engine; see review.yml for which operations are documented verbatim versus inferred from the SDK.\n\nContact Support:\n Name: Klu Support",
+      "type": "text/plain"
+    }
+  }
+}

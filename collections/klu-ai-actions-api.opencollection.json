@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klu Actions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Run an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/actions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a Klu Action by GUID against the provided input, returning the generated completion and a feedback URL containing the data point GUID. Supports streaming, async execution, response caching, session memory, context metadata filtering, and experiments."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

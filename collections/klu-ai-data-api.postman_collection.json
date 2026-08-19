@@ -1,0 +1,189 @@
+{
+  "item": [
+    {
+      "id": "d9527779-1b32-42ce-86c6-0f7d3b10b9bf",
+      "name": "Data",
+      "description": {
+        "content": "Data points produced by Action generations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c737ca33-50cb-46c1-8558-2c872914348b",
+          "name": "Get a data point",
+          "request": {
+            "name": "Get a data point",
+            "description": {
+              "content": "Retrieves a data point by GUID, including its prompt, completion, and metadata. The data point GUID is returned in the feedback URL of an Action run.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                ":guid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) GUID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d797cdd-fe8b-4905-905a-3949cfac271e",
+              "name": "Data point.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) GUID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"guid\": \"string\",\n  \"prompt\": \"string\",\n  \"completion\": \"string\",\n  \"meta_data\": {\n    \"key_0\": 4225,\n    \"key_1\": true,\n    \"key_2\": true\n  },\n  \"created_at\": \"1975-04-29T18:00:50.345Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9e89378-2c7a-40ec-8608-d9dd22ce8f61",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    ":guid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) GUID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.klu.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "26246e0c-629d-4b5e-8fee-f054d634e243",
+    "name": "Klu Actions Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Klu (klu.ai) LLM app platform. The Klu Engine runs Actions - each encapsulating a prompt template, model config, context (RAG), and output parsing - against input variables to generate completions, and manages the data, feedback, sessions, models, apps, and workspaces around them. Authentication is via a Bearer API key obtained from the workspace API Keys settings.\nNOTE - Endpoints under the Actions, Context, and Apps/Workspaces paths reflect the publicly documented Klu API reference and SDK surface. Where the public docs document a capability via the SDK but do not publish the exact REST path, this spec models the conventional resource path used by the Klu Engine; see review.yml for which operations are documented verbatim versus inferred from the SDK.\n\nContact Support:\n Name: Klu Support",
+      "type": "text/plain"
+    }
+  }
+}

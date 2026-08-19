@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klu Actions Feedback API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit feedback on a data point",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/feedback",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits feedback - a rating, correction, or issue - for a generation. For ratings, Klu uses 1 for negative and 2 for positive."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

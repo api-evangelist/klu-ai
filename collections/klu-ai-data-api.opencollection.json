@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klu Actions Data API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a data point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klu.ai/v1/data/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path",
+                "description": "GUID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a data point by GUID, including its prompt, completion, and metadata. The data point GUID is returned in the feedback URL of an Action run."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

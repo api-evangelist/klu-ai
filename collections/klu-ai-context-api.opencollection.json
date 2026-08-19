@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klu Actions Context API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Context",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Context library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/context",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Context library. Klu automatically builds a vector index and performs retrieval-augmented generation via similarity search over its documents."
+        },
+        {
+          "info": {
+            "name": "Add a document to a Context library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/context/:guid/documents",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path",
+                "description": "GUID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds app data as a Context document with optional metadata."
+        },
+        {
+          "info": {
+            "name": "Add files to a Context library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/context/:guid/add_files",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path",
+                "description": "GUID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds one or more files to an existing Context library."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Klu Actions Apps API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Apps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klu.ai/v1/apps"
+          },
+          "docs": "Lists the Apps (projects) in the workspace."
+        },
+        {
+          "info": {
+            "name": "Create an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.klu.ai/v1/apps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an app"
+        },
+        {
+          "info": {
+            "name": "Get an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.klu.ai/v1/apps/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path",
+                "description": "GUID of the resource."
+              }
+            ]
+          },
+          "docs": "Get an app"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
