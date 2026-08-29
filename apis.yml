@@ -10,6 +10,18 @@ description: Klu (klu.ai) is an LLM app platform for designing, deploying, evalu
   development appears dormant - the official klu SDK last shipped in March 2025 and
   the founding team's recent open-source work has shifted toward xAI / Grok tooling
   - see review.yml for the honest status assessment.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
