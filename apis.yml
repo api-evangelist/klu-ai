@@ -231,6 +231,8 @@ apis:
   humanURL: https://docs.klu.ai/resources/api-actions
   baseURL: https://api.klu.ai/v1
   tags:
+  - Workspace
+  tags_raw:
   - Workspaces
   properties:
   - type: OpenAPI
