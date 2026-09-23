@@ -1,14 +1,7 @@
 {
   "provider": "klu-ai",
   "sources": [
-    "klu-ai-actions-api-openapi.yml",
-    "klu-ai-apps-api-openapi.yml",
-    "klu-ai-context-api-openapi.yml",
-    "klu-ai-data-api-openapi.yml",
-    "klu-ai-feedback-api-openapi.yml",
-    "klu-ai-models-api-openapi.yml",
-    "klu-ai-sessions-api-openapi.yml",
-    "klu-ai-workspaces-api-openapi.yml"
+    "_original/klu-ai-openapi.yml"
   ],
   "outputs": [
     "klu-ai-actions-api-openapi.yml",
@@ -23,6 +16,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "klu-ai-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "klu-ai-actions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "klu-ai-apps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "klu-ai-context-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "klu-ai-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "klu-ai-feedback-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "klu-ai-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "klu-ai-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "klu-ai-workspaces-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,9 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Klu Actions Data API
-  description: 'REST API for the Klu (klu.ai) LLM app platform. The Klu Engine runs Actions - each encapsulating a prompt template, model config, context (RAG), and output parsing - against input variables to generate completions, and manages the data, feedback, sessions, models, apps, and workspaces around them. Authentication is via a Bearer API key obtained from the workspace API Keys settings.
-
-    NOTE - Endpoints under the Actions, Context, and Apps/Workspaces paths reflect the publicly documented Klu API reference and SDK surface. Where the public docs document a capability via the SDK but do not publish the exact REST path, this spec models the conventional resource path used by the Klu Engine; see review.yml for which operations are documented verbatim versus inferred from the SDK.'
+  title: Klu Data API
+  description: REST API for the Klu (klu.ai) LLM app platform.
   termsOfService: https://klu.ai/terms
   contact:
     name: Klu Support
@@ -37,6 +35,14 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    Guid:
+      name: guid
+      in: path
+      required: true
+      description: GUID of the resource.
+      schema:
+        type: string
   schemas:
     DataPoint:
       type: object
@@ -67,14 +73,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Guid:
-      name: guid
-      in: path
-      required: true
-      description: GUID of the resource.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

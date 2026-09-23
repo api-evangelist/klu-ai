@@ -1,9 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Klu Actions Context API
-  description: 'REST API for the Klu (klu.ai) LLM app platform. The Klu Engine runs Actions - each encapsulating a prompt template, model config, context (RAG), and output parsing - against input variables to generate completions, and manages the data, feedback, sessions, models, apps, and workspaces around them. Authentication is via a Bearer API key obtained from the workspace API Keys settings.
-
-    NOTE - Endpoints under the Actions, Context, and Apps/Workspaces paths reflect the publicly documented Klu API reference and SDK surface. Where the public docs document a capability via the SDK but do not publish the exact REST path, this spec models the conventional resource path used by the Klu Engine; see review.yml for which operations are documented verbatim versus inferred from the SDK.'
+  title: Klu Context API
+  description: REST API for the Klu (klu.ai) LLM app platform.
   termsOfService: https://klu.ai/terms
   contact:
     name: Klu Support
@@ -85,7 +83,58 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    Guid:
+      name: guid
+      in: path
+      required: true
+      description: GUID of the resource.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    AddContextFilesRequest:
+      type: object
+      required:
+      - files
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+    CreateContextRequest:
+      type: object
+      required:
+      - name
+      - description
+      - type
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum:
+          - Files
+          - Custom
+        files:
+          type: array
+          items:
+            type: string
     Context:
       type: object
       properties:
@@ -107,15 +156,6 @@ components:
         meta_data:
           type: object
           additionalProperties: true
-    AddContextFilesRequest:
-      type: object
-      required:
-      - files
-      properties:
-        files:
-          type: array
-          items:
-            type: string
     AddContextDocumentRequest:
       type: object
       required:
@@ -126,48 +166,6 @@ components:
         meta_data:
           type: object
           additionalProperties: true
-    CreateContextRequest:
-      type: object
-      required:
-      - name
-      - description
-      - type
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        type:
-          type: string
-          enum:
-          - Files
-          - Custom
-        files:
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    Guid:
-      name: guid
-      in: path
-      required: true
-      description: GUID of the resource.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
