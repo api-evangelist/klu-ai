@@ -52,14 +52,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    Guid:
-      name: guid
-      in: path
-      required: true
-      description: GUID of the resource.
-      schema:
-        type: string
   schemas:
     Error:
       type: object
@@ -81,6 +73,14 @@ components:
           description: Provider name, e.g. OpenAI or Anthropic.
         key:
           type: string
+  parameters:
+    Guid:
+      name: guid
+      in: path
+      required: true
+      description: GUID of the resource.
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Missing or invalid API key.

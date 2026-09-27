@@ -56,6 +56,31 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    CreateSessionRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          description: GUID of the Action this session is associated with.
+        name:
+          type: string
+    Session:
+      type: object
+      properties:
+        guid:
+          type: string
+        action:
+          type: string
+        name:
+          type: string
   parameters:
     Guid:
       name: guid
@@ -71,31 +96,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    Session:
-      type: object
-      properties:
-        guid:
-          type: string
-        action:
-          type: string
-        name:
-          type: string
-    CreateSessionRequest:
-      type: object
-      properties:
-        action:
-          type: string
-          description: GUID of the Action this session is associated with.
-        name:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

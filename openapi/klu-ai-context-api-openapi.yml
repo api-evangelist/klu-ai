@@ -83,28 +83,34 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    Guid:
-      name: guid
-      in: path
-      required: true
-      description: GUID of the resource.
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    ContextDocument:
+      type: object
+      properties:
+        guid:
+          type: string
+        text:
+          type: string
+        meta_data:
+          type: object
+          additionalProperties: true
     Error:
       type: object
       properties:
         error:
           type: string
         message:
+          type: string
+    Context:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        type:
           type: string
     AddContextFilesRequest:
       type: object
@@ -115,6 +121,16 @@ components:
           type: array
           items:
             type: string
+    AddContextDocumentRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+        meta_data:
+          type: object
+          additionalProperties: true
     CreateContextRequest:
       type: object
       required:
@@ -135,37 +151,21 @@ components:
           type: array
           items:
             type: string
-    Context:
-      type: object
-      properties:
-        guid:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        type:
-          type: string
-    ContextDocument:
-      type: object
-      properties:
-        guid:
-          type: string
-        text:
-          type: string
-        meta_data:
-          type: object
-          additionalProperties: true
-    AddContextDocumentRequest:
-      type: object
-      required:
-      - text
-      properties:
-        text:
-          type: string
-        meta_data:
-          type: object
-          additionalProperties: true
+  parameters:
+    Guid:
+      name: guid
+      in: path
+      required: true
+      description: GUID of the resource.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
