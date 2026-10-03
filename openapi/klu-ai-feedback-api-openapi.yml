@@ -39,7 +39,27 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Feedback:
+      type: object
+      properties:
+        guid:
+          type: string
+        data_guid:
+          type: string
+        type:
+          type: string
+        value:
+          oneOf:
+          - type: integer
+          - type: string
     Error:
       type: object
       properties:
@@ -68,26 +88,6 @@ components:
           oneOf:
           - type: integer
           - type: string
-    Feedback:
-      type: object
-      properties:
-        guid:
-          type: string
-        data_guid:
-          type: string
-        type:
-          type: string
-        value:
-          oneOf:
-          - type: integer
-          - type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

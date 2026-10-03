@@ -56,6 +56,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -63,14 +70,6 @@ components:
         error:
           type: string
         message:
-          type: string
-    CreateSessionRequest:
-      type: object
-      properties:
-        action:
-          type: string
-          description: GUID of the Action this session is associated with.
-        name:
           type: string
     Session:
       type: object
@@ -81,6 +80,14 @@ components:
           type: string
         name:
           type: string
+    CreateSessionRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          description: GUID of the Action this session is associated with.
+        name:
+          type: string
   parameters:
     Guid:
       name: guid
@@ -89,13 +96,6 @@ components:
       description: GUID of the resource.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
