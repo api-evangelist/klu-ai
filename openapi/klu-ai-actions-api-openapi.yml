@@ -55,13 +55,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     RunActionRequest:
       type: object
       required:
@@ -114,6 +107,13 @@ components:
         data_guid:
           type: string
           description: GUID of the data point recorded for this generation.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

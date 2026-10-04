@@ -64,12 +64,13 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    CreateSessionRequest:
       type: object
       properties:
-        error:
+        action:
           type: string
-        message:
+          description: GUID of the Action this session is associated with.
+        name:
           type: string
     Session:
       type: object
@@ -80,13 +81,12 @@ components:
           type: string
         name:
           type: string
-    CreateSessionRequest:
+    Error:
       type: object
       properties:
-        action:
+        error:
           type: string
-          description: GUID of the Action this session is associated with.
-        name:
+        message:
           type: string
   parameters:
     Guid:

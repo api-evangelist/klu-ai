@@ -72,19 +72,23 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     App:
       type: object
       properties:
         guid:
           type: string
+        name:
+          type: string
+        description:
+          type: string
+        app_type:
+          type: string
+    CreateAppRequest:
+      type: object
+      required:
+      - name
+      properties:
         name:
           type: string
         description:
@@ -98,17 +102,13 @@ components:
           type: string
         message:
           type: string
-    CreateAppRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        app_type:
-          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     Guid:
       name: guid
