@@ -252,6 +252,9 @@ apis:
   - type: Documentation
     url: https://docs.klu.ai/resources/api-basics
 common:
+- type: CapabilityMap
+  url: capabilities/klu-ai-capability-edges.yml
+  name: Klu Business Capability Map
 - type: AgenticAccess
   url: agentic-access/klu-ai-agentic-access.yml
 - type: DomainSecurity
