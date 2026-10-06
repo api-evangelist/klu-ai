@@ -52,7 +52,7 @@ tags_raw:
 - Evaluation
 - Observability
 created: '2026-06-20'
-modified: '2026-06-20'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: klu-ai:klu-ai-actions-api
@@ -252,6 +252,8 @@ apis:
   - type: Documentation
     url: https://docs.klu.ai/resources/api-basics
 common:
+- url: https://klu.ai/blog
+  type: Blog
 - type: CapabilityMap
   url: capabilities/klu-ai-capability-edges.yml
   name: Klu Business Capability Map
