@@ -252,6 +252,8 @@ apis:
   - type: Documentation
     url: https://docs.klu.ai/resources/api-basics
 common:
+- type: Pricing
+  url: https://klu.ai/pricing
 - url: https://klu.ai/blog
   type: Blog
 - type: CapabilityMap
