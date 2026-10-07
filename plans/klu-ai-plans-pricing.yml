@@ -11,9 +11,11 @@ provenance:
 audience: business-product
 pricing_basis: tiered-subscription
 delivery:
-  delivery: managed
+  delivery: managed+licensed
   method: page
   read: '2026-10-07'
+  evidence: Private cloud deployment
+  managed_tier: Team
 published: true
 note: Monthly/yearly toggle tiers; Enterprise is custom with private cloud deployment. Volume based pricing
   mentioned in FAQ.
