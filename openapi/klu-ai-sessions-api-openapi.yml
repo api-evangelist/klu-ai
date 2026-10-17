@@ -72,6 +72,13 @@ components:
           description: GUID of the Action this session is associated with.
         name:
           type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Session:
       type: object
       properties:
@@ -80,13 +87,6 @@ components:
         action:
           type: string
         name:
-          type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
           type: string
   parameters:
     Guid:

@@ -35,29 +35,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  schemas:
-    DataPoint:
-      type: object
-      properties:
-        guid:
-          type: string
-        prompt:
-          type: string
-        completion:
-          type: string
-        meta_data:
-          type: object
-          additionalProperties: true
-        created_at:
-          type: string
-          format: date-time
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
   responses:
     Unauthorized:
       description: Missing or invalid API key.
@@ -73,6 +50,29 @@ components:
       description: GUID of the resource.
       schema:
         type: string
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    DataPoint:
+      type: object
+      properties:
+        guid:
+          type: string
+        prompt:
+          type: string
+        completion:
+          type: string
+        meta_data:
+          type: object
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

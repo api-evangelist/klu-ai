@@ -84,6 +84,25 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    ContextDocument:
+      type: object
+      properties:
+        guid:
+          type: string
+        text:
+          type: string
+        meta_data:
+          type: object
+          additionalProperties: true
+    AddContextFilesRequest:
+      type: object
+      required:
+      - files
+      properties:
+        files:
+          type: array
+          items:
+            type: string
     AddContextDocumentRequest:
       type: object
       required:
@@ -132,32 +151,6 @@ components:
           type: string
         message:
           type: string
-    AddContextFilesRequest:
-      type: object
-      required:
-      - files
-      properties:
-        files:
-          type: array
-          items:
-            type: string
-    ContextDocument:
-      type: object
-      properties:
-        guid:
-          type: string
-        text:
-          type: string
-        meta_data:
-          type: object
-          additionalProperties: true
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Guid:
       name: guid
@@ -166,6 +159,13 @@ components:
       description: GUID of the resource.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
