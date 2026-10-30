@@ -1,4 +1,4 @@
-# Klu (klu-ai)
+# Klu
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,144 +64,133 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Klu (klu.ai) is an LLM app platform for designing, deploying, evaluating, and observing prompt-driven AI applications. The Klu Engine exposes a REST API at https://api.klu.ai/v1 (Bearer API key) where an Action encapsulates a prompt template, model config, context (RAG), and output parsing, and is invoked to generate completions, with data, feedback, sessions, and models managed alongside it.
+Klu (klu.ai) is an LLM app platform for designing, deploying, evaluating, and observing prompt-driven AI applications. The Klu Engine exposes a REST API at https://api.klu.ai/v1 (Bearer API key) where an Action encapsulates a prompt template, model config, context (RAG), and output parsing, and is invoked to generate completions, with data, feedback, sessions, and models managed alongside it. NOTE - product development appears dormant - the official klu SDK last shipped in March 2025 and the founding team's recent open-source work has shifted toward xAI / Grok tooling - see review.yml for the honest status assessment.
 
-> NOTE — product development appears dormant. The official `klu` SDK last shipped in March 2025 and the founding team's recent open-source work has shifted toward xAI / Grok tooling. See `review.yml` for the honest status assessment.
+**Areas:** Artificial Intelligence · LLM · LLM App Platform · Prompt Engineering · Evaluation · Observability
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/klu-ai/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/klu-ai/refs/heads/main/apis.yml)
+## Klu on APIs.io
 
-## Tags
+Everything profiled for Klu is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/klu-ai/](https://apis.io/providers/klu-ai/)** — or go straight to one of the APIs or properties below.
 
-- AI
-- LLM
-- LLM App Platform
-- Prompt Engineering
-- Evaluation
-- Observability
+### APIs (8)
 
-## Timestamps
+- [Klu Actions API](https://apis.io/apis/klu-ai/klu-ai-actions-api/) — Run Actions to generate completions.
+- [Klu Apps API](https://apis.io/apis/klu-ai/klu-ai-apps-api/) — Apps (projects) grouping Actions, context, and experiments.
+- [Klu Context API](https://apis.io/apis/klu-ai/klu-ai-context-api/) — Manage Context libraries and documents for retrieval-augmented generation.
+- [Klu Data API](https://apis.io/apis/klu-ai/klu-ai-data-api/) — Data points produced by Action generations.
+- [Klu Feedback API](https://apis.io/apis/klu-ai/klu-ai-feedback-api/) — Ratings, corrections, and issues attached to data points.
+- [Klu Models API](https://apis.io/apis/klu-ai/klu-ai-models-api/) — LLM providers and models available in the workspace.
+- [Klu Sessions API](https://apis.io/apis/klu-ai/klu-ai-sessions-api/) — Session memory for multi-turn conversations.
+- [Klu Workspaces API](https://apis.io/apis/klu-ai/klu-ai-workspaces-api/) — Workspace administration.
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Klu Actions / Prompt API
+#### Agentic access (1)
 
-Runs a Klu Action by GUID against input variables, returning a generated completion plus a feedback URL. Supports streaming, async execution, response caching, session memory, context metadata filtering, and experiments. This is the core generative endpoint of the Klu Engine.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://docs.klu.ai/resources/api-actions](https://docs.klu.ai/resources/api-actions)
-- **Base URL:** `https://api.klu.ai/v1`
+- [Klu Ai Agentic Access](https://apis.io/agentic-access/klu-ai/klu-ai-agentic-access/)
 
-#### Tags
+#### Collections (9)
 
-- Actions
-- Prompt
-- Completions
-- Generation
+Postman and Open Collection request collections.
 
-#### Properties
+- [Klu API](https://apis.io/collections/klu-ai/open-klu-ai/)
+- [Klu Actions API](https://apis.io/collections/klu-ai/open-klu-ai-actions-api/)
+- [Klu Actions Apps API](https://apis.io/collections/klu-ai/open-klu-ai-apps-api/)
+- [Klu Actions Context API](https://apis.io/collections/klu-ai/open-klu-ai-context-api/)
+- [Klu Actions Data API](https://apis.io/collections/klu-ai/open-klu-ai-data-api/)
+- [Klu Actions Feedback API](https://apis.io/collections/klu-ai/open-klu-ai-feedback-api/)
+- [Klu Actions Models API](https://apis.io/collections/klu-ai/open-klu-ai-models-api/)
+- [Klu Actions Sessions API](https://apis.io/collections/klu-ai/open-klu-ai-sessions-api/)
+- [Klu Actions Workspaces API](https://apis.io/collections/klu-ai/open-klu-ai-workspaces-api/)
 
-- [Documentation](https://docs.klu.ai/resources/api-actions)
-- [API Reference](https://docs.klu.ai/resources/api-basics)
-- [OpenAPI](openapi/klu-ai-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/klu-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klu-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (2)
 
-### Klu Data / Feedback API
+Authentication, trust centre, and vulnerability disclosure.
 
-Captures and manages the data points generated by Actions - each holding the prompt, completion, and metadata - and the feedback (ratings, corrections, issues) attached to them. Data can be imported and exported as JSONL/CSV for evaluation and fine-tuning. Context libraries for retrieval-augmented generation are managed here.
+- [Klu Ai Authentication](https://apis.io/security/klu-ai/klu-ai-authentication/)
+- [Klu Ai Domain Security](https://apis.io/security/klu-ai/klu-ai-domain-security/)
 
-- **Human URL:** [https://docs.klu.ai/guides/data](https://docs.klu.ai/guides/data)
-- **Base URL:** `https://api.klu.ai/v1`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Data
-- Feedback
-- Ratings
-- Datasets
+- [Klu Ai Plans Pricing](https://apis.io/plans/klu-ai/klu-ai-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://docs.klu.ai/guides/data)
-- [API Reference](https://docs.klu.ai/resources/api-context)
-- [OpenAPI](openapi/klu-ai-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/klu-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klu-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### Klu Models API
+- [Klu Ai Rate Limits](https://apis.io/rate-limits/klu-ai/klu-ai-rate-limits/)
 
-Manages the LLM providers and models available in a workspace and the default model used by Actions. Klu brokers across 50+ models and providers (OpenAI, Anthropic, and others) so an Action's model config can be changed without rewriting integration code.
+#### FinOps (1)
 
-- **Human URL:** [https://docs.klu.ai/key-concepts](https://docs.klu.ai/key-concepts)
-- **Base URL:** `https://api.klu.ai/v1`
+What the API costs to run, by operation.
 
-#### Tags
+- [Klu Ai Finops](https://apis.io/finops/klu-ai/klu-ai-finops/)
 
-- Models
-- Providers
-- Configuration
+## Where to find this API
 
-#### Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [Documentation](https://docs.klu.ai/resources/api-basics)
-- [OpenAPI](openapi/klu-ai-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/klu-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klu-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Klu Sessions API
-
-Stores and retrieves session memory across multiple Action generations, enabling multi-turn conversational experiences such as copilots and coaches that retain context between requests via a session GUID.
-
-- **Human URL:** [https://docs.klu.ai/key-concepts](https://docs.klu.ai/key-concepts)
-- **Base URL:** `https://api.klu.ai/v1`
-
-#### Tags
-
-- Sessions
-- Memory
-- Conversations
-
-#### Properties
-
-- [Documentation](https://docs.klu.ai/resources/api-basics)
-- [OpenAPI](openapi/klu-ai-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/klu-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klu-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Klu Apps / Workspaces API
-
-Organizes work into Workspaces and Apps (projects) that group related Actions, context, and experiments. Apps are the top-level container for an AI use case; experiments run prompt-vs-prompt evaluations and A/B tests within them.
-
-- **Human URL:** [https://docs.klu.ai/key-concepts](https://docs.klu.ai/key-concepts)
-- **Base URL:** `https://api.klu.ai/v1`
-
-#### Tags
-
-- Apps
-- Workspaces
-- Projects
-- Experiments
-
-#### Properties
-
-- [Documentation](https://docs.klu.ai/resources/api-basics)
-- [OpenAPI](openapi/klu-ai-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/klu-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/klu-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/klu-ai)
-- [LinkedIn](https://www.linkedin.com/company/klu-ai)
 - [Website](https://klu.ai)
 - [Documentation](https://docs.klu.ai)
-- [Plans](plans/klu-ai-plans-pricing.yml)
-- [Rate Limits](rate-limits/klu-ai-rate-limits.yml)
-- [Fin Ops](finops/klu-ai-finops.yml)
+- [Pricing](https://klu.ai/pricing)
+- [Blog](https://klu.ai/blog)
+- [GitHub](https://github.com/klu-ai)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 33.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 46.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 42.1 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/klu-ai/](https://apis.io/providers/klu-ai/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Klu: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/klu-ai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
